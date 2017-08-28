@@ -2,12 +2,13 @@
 - hosts: all
   become: true
   tasks:
+    - name: update apt
+      shell: apt-get update
     - name: install apt-transport-https
       apt:
         name: apt-transport-https
         state: present
         force: yes
-        update_cache: yes
     - name: add skype repo key
       apt_key:
         url: https://repo.skype.com/data/SKYPE-GPG-KEY
@@ -22,7 +23,7 @@
         - deb [arch=amd64] https://repo.skype.com/deb stable main
         - deb http://us.archive.ubuntu.com/ubuntu/ zesty multiverse
         - deb http://us.archive.ubuntu.com/ubuntu/ zesty-updates multiverse
-        - deb http://dl.binary.com/dawidd6/neofetch jessie main
+        - deb http://dl.bintray.com/dawidd6/neofetch jessie main
     - name: install skype
       apt:
         name: skypeforlinux
@@ -50,7 +51,7 @@
         - vim
         - zip
         # for keypass
-        - gtbase5-dev
+        - qtbase5-dev
         - libqt5x11extras5-dev
         - qttools5-dev
         - qttools5-dev-tools
