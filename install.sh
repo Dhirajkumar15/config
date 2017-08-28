@@ -1,3 +1,5 @@
+GIT_DIR=~/git
+CONFIG_REPO=$GIT_DIR/config
 USER=camille
 
 apt-get install software-properties-common
@@ -8,13 +10,14 @@ apt-get upgrade
 echo "Install python and ansible"
 
 apt-get install python-dev python-pip
+chown -R $USER:$USER ~/.cache
 apt-get install ansible
 pip install ansible markupsafe
 chown -R $USER:$USER ~/.ansible
 
 echo "Run ansible provisioning playbooks"
 
-ANSIBLE_NOCOWS=1 ansible-playbppl -K -c local -i localhost, packages.yml
+ANSIBLE_NOCOWS=1 ansible-playbook -K -c local -i localhost, packages.yml -vvv
 
 echo "Install Sublime Text"
 
@@ -35,7 +38,6 @@ chown -R $USER:$USER ~/.nvm
 
 echo "Setup symlinks"
 
-mkdir ~/.config/dunst
 ln -sf $CONFIG_REPO/config/ .xbindkeysrc ~/.xbindkeysrc
 
-
+# Install libreoffice english dictionary
